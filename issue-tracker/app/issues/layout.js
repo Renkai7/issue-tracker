@@ -1,10 +1,10 @@
 "use client";
 import { useParams, usePathname } from "next/navigation";
-import IssuePage from "./[issueId]/page";
+import IssuePage from "./[issueSlug]/page";
 import Dashboard from "./page";
 
 const IssuesLayout = ({ children }) => {
-  const { issueId } = useParams();
+  const { issueSlug } = useParams();
   const pathname = usePathname();
 
   return (
@@ -12,7 +12,7 @@ const IssuesLayout = ({ children }) => {
       {/* Remove Dashboard when creating new Issue */}
       {pathname !== "/issues/new" && <Dashboard />}
 
-      {issueId && <IssuePage />}
+      {issueSlug && <IssuePage />}
     </div>
   );
 };

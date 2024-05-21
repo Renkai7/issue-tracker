@@ -4,23 +4,26 @@ import { useEffect, useState } from "react";
 import { getIssues } from "@/app/lib/api";
 
 const IssuePage = () => {
-  const { issueId } = useParams();
+  const { issueSlug } = useParams();
   const [issue, setIssue] = useState(null);
 
   useEffect(() => {
     const fetchIssue = async () => {
-      if (issueId) {
+      if (issueSlug) {
+        const [_, issueNumber] = issueSlug.split("-");
         const issues = await getIssues();
 
         if (issues) {
-          const selectedIssue = issues.find((issue) => issue._id === issueId);
+          const selectedIssue = issues.find(
+            (issue) => issue.issueNumber.toString() === issueNumber
+          );
           setIssue(selectedIssue);
         }
       }
     };
 
     fetchIssue();
-  }, [issueId]);
+  }, [issueSlug]);
 
   if (!issue)
     return (

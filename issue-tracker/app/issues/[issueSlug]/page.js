@@ -10,7 +10,7 @@ const IssuePage = () => {
   useEffect(() => {
     const fetchIssue = async () => {
       if (issueSlug) {
-        const [_, issueNumber] = issueSlug.split("-");
+        const issueNumber = issueSlug.split("-")[1];
         const issues = await getIssues();
 
         if (issues) {

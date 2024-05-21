@@ -1,18 +1,16 @@
 "use client";
-import { useParams, usePathname } from "next/navigation";
-import IssuePage from "./[issueSlug]/page";
-import Dashboard from "./page";
+import { usePathname } from "next/navigation";
+
+import Dashboard from "../components/Dashboard";
 
 const IssuesLayout = ({ children }) => {
-  const { issueSlug } = useParams();
   const pathname = usePathname();
 
   return (
     <div className="flex">
       {/* Remove Dashboard when creating new Issue */}
       {pathname !== "/issues/new" && <Dashboard />}
-
-      {issueSlug && <IssuePage />}
+      {children}
     </div>
   );
 };

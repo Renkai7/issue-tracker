@@ -10,6 +10,7 @@ const IssuesLayout = ({ children }) => {
     <div className="flex">
       {/* Remove Dashboard when creating new Issue */}
       {pathname !== "/issues/new" && <Dashboard />}
+
       {children}
     </div>
   );

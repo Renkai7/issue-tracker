@@ -1,4 +1,4 @@
-// Get all issues
+//* Get all issues
 export const getIssues = async () => {
   try {
     const res = await fetch("http://localhost:3000/api/issues", {
@@ -18,5 +18,3 @@ export const getIssues = async () => {
     console.log("failed to get issues", error);
   }
 };
-
-// TODO: Add POST issue API

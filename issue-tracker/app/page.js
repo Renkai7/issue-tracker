@@ -1,5 +1,3 @@
-import Dashboard from "./components/Dashboard";
-
 const Home = () => {
   return <div className="bg-base-200">Home Page</div>;
 };

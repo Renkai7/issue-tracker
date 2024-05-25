@@ -1,7 +1,7 @@
 "use client";
 import { usePathname } from "next/navigation";
 
-import Dashboard from "../components/Dashboard";
+import IssueDashboard from "@/components/issues/IssueDashboard";
 
 const IssuesLayout = ({ children }) => {
   const pathname = usePathname();
@@ -9,7 +9,7 @@ const IssuesLayout = ({ children }) => {
   return (
     <div className="flex">
       {/* Remove Dashboard when creating new Issue */}
-      {pathname !== "/issues/new" && <Dashboard />}
+      {pathname !== "/issues/new" && <IssueDashboard />}
 
       {children}
     </div>

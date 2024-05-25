@@ -1,54 +1,7 @@
-"use client";
-import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { getIssues } from "@/app/lib/api";
+import IssueDetailCard from "@components/issues/IssueDetailCard";
 
 const IssuePage = () => {
-  const { issueSlug } = useParams();
-  const [issue, setIssue] = useState(null);
-
-  useEffect(() => {
-    const fetchIssue = async () => {
-      if (issueSlug) {
-        const issueNumber = issueSlug.split("-")[1];
-        const issues = await getIssues();
-
-        if (issues) {
-          const selectedIssue = issues.find(
-            (issue) => issue.issueNumber.toString() === issueNumber
-          );
-          setIssue(selectedIssue);
-        }
-      }
-    };
-
-    fetchIssue();
-  }, [issueSlug]);
-
-  if (!issue)
-    return (
-      <p>
-        Loading... <span className="loading loading-spinner text-info"></span>
-      </p>
-    );
-
-  return (
-    <div className="items-center p-6 bg-base-200 min-h-screen flex-1">
-      <div className="card w-full max-w-3xl bg-base-100 shadow-xl">
-        <div className="card-body">
-          <h2 className="card-title text-4xl font-bold">{issue.title}</h2>
-          <div className="badge badge-secondary badge-outline">
-            {issue.status}
-          </div>
-          <p className="mt-4 text-lg">{issue.description}</p>
-          <div className="card-actions justify-end mt-6">
-            <button className="btn btn-primary">Edit</button>
-            <button className="btn btn-secondary">Delete</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  return <IssueDetailCard />;
 };
 
 export default IssuePage;

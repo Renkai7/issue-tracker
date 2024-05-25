@@ -1,4 +1,4 @@
-import Issue from "@/models/Issue.Model";
+import Issue from "models/Issue.Model";
 import { NextResponse } from "next/server";
 
 //* Get issues/[id]

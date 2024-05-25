@@ -16,9 +16,9 @@ export async function POST(req) {
   try {
     const body = await req.json();
     const issueData = body.formData;
-    Issue.create(issueData);
+    const newIssue = await Issue.create(issueData);
 
-    return NextResponse.json({ message: "Issue Created" }, { status: 201 });
+    return NextResponse.json(newIssue, { status: 201 });
   } catch (error) {
     return NextResponse.json({ message: "Error", error }, { status: 500 });
   }

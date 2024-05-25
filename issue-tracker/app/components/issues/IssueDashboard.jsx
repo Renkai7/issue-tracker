@@ -1,7 +1,7 @@
 "use client";
 
-import IssueCard from "@/components/issues/IssueCard";
-import { useIssues } from "@/components/context/IssueContext";
+import IssueCard from "@components/issues/IssueCard";
+import { useIssues } from "@components/context/IssueContext";
 
 const IssueDashboard = () => {
   const { issues } = useIssues();

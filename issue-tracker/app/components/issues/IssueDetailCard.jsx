@@ -13,7 +13,6 @@ const IssueDetailCard = () => {
     const fetchIssue = async () => {
       if (issueSlug) {
         const issueNumber = issueSlug.split("-")[1];
-        // const issues = await getIssues();
 
         if (issues) {
           const selectedIssue = issues.find(
@@ -33,6 +32,7 @@ const IssueDetailCard = () => {
         Loading... <span className="loading loading-spinner text-info"></span>
       </p>
     );
+
   return (
     <div className="items-center p-6 bg-base-200 min-h-screen flex-1">
       <div className="card w-full max-w-3xl bg-base-100 shadow-xl">

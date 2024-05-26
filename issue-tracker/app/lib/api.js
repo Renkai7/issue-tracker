@@ -73,3 +73,20 @@ export const deleteIssue = async (issueId) => {
     console.log("failed to delete issue", error);
   }
 };
+
+// TODO: Add PUT api
+export const updateIssue = async (issueId, formData) => {
+  try {
+    const res = await fetch(
+      `http://localhost:3000/api/issues/by-id/${issueId}`,
+      {
+        method: "PUT",
+        body: JSON.stringify({ formData }),
+        "content-type": "application/json",
+      }
+    );
+    return res;
+  } catch (error) {
+    console.log("failed to update issue", error);
+  }
+};

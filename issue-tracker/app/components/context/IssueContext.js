@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useEffect, useMemo } from "react";
-import { getIssues, deleteIssue, addIssue } from "@/lib/api";
+import { getIssues, deleteIssue, addIssue, updateIssue } from "@/lib/api";
 
 const IssueContext = createContext();
 
@@ -35,8 +35,19 @@ export const IssueProvider = ({ children }) => {
     }
   };
 
+  const updateIssueById = async (id, formData) => {
+    const res = await updateIssue(id, formData);
+    if (res.ok) {
+      const updatedIssue = await res.json();
+      setIssues((prevIssues) => [...prevIssues, updatedIssue]);
+      return updatedIssue;
+    } else {
+      console.error("Failed to update issue");
+    }
+  };
+
   const contextValue = useMemo(
-    () => ({ issues, deleteIssueById, addNewIssue }),
+    () => ({ issues, deleteIssueById, addNewIssue, updateIssueById }),
     [issues]
   );
 

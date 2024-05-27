@@ -31,15 +31,12 @@ export async function PUT(req, { params }) {
   try {
     const { id } = params;
     const body = await req.json();
-    const issueData = body.formData;
 
-    // const updatedIssueData = await Issue.findByIdAndUpdate(id, {
-    //   ...issueData,
-    // });
+    const updatedIssueData = await Issue.findByIdAndUpdate(id, body, {
+      new: true,
+    });
 
-    console.log(issueData);
-
-    return NextResponse.json({ message: "Update successful" }, { status: 200 });
+    return NextResponse.json(updatedIssueData, { status: 200 });
   } catch (error) {
     return NextResponse.json({ message: "Error", error }, { status: 500 });
   }

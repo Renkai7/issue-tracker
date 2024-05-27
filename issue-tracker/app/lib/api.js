@@ -75,13 +75,13 @@ export const deleteIssue = async (issueId) => {
 };
 
 // TODO: Add PUT api
-export const updateIssue = async (issueId, formData) => {
+export const updateIssue = async (issueId, updatedData) => {
   try {
     const res = await fetch(
       `http://localhost:3000/api/issues/by-id/${issueId}`,
       {
         method: "PUT",
-        body: JSON.stringify({ formData }),
+        body: JSON.stringify(updatedData),
         "content-type": "application/json",
       }
     );

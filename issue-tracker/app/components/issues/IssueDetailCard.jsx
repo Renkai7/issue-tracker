@@ -7,7 +7,28 @@ import DeleteButton from "@components/common/DeleteButton";
 const IssueDetailCard = () => {
   const { issueSlug } = useParams();
   const [issue, setIssue] = useState(null);
-  const { issues } = useIssues();
+  const { issues, updateExistingIssue } = useIssues();
+
+  const [isEditingTitle, setIsEditingTitle] = useState(false);
+  const [title, setTitle] = useState("");
+
+  const handleTitleClick = () => {
+    setIsEditingTitle(true);
+  };
+
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const handleTitleBlur = async () => {
+    setIsEditingTitle(false);
+
+    try {
+      await updateExistingIssue(issue._id, { title });
+    } catch (error) {
+      console.error("Failed to update issue", error);
+    }
+  };
 
   useEffect(() => {
     const fetchIssue = async () => {
@@ -18,13 +39,18 @@ const IssueDetailCard = () => {
           const selectedIssue = issues.find(
             (issue) => issue.issueNumber.toString() === issueNumber
           );
-          setIssue(selectedIssue);
+
+          // * Only set issue if there is an issue selected
+          if (selectedIssue) {
+            setIssue(selectedIssue);
+            setTitle(selectedIssue.title);
+          }
         }
       }
     };
 
     fetchIssue();
-  }, [issueSlug]);
+  }, [issueSlug, issues]);
 
   if (!issue)
     return (
@@ -37,7 +63,23 @@ const IssueDetailCard = () => {
     <div className="items-center p-6 bg-base-200 min-h-screen flex-1">
       <div className="card w-full max-w-3xl bg-base-100 shadow-xl">
         <div className="card-body">
-          <h2 className="card-title text-4xl font-bold">{issue.title}</h2>
+          {isEditingTitle ? (
+            <input
+              type="text"
+              value={title}
+              onChange={handleTitleChange}
+              onBlur={handleTitleBlur}
+              className="text-4xl font-bold w-full"
+              autoFocus
+            />
+          ) : (
+            <h2
+              className="card-title text-4xl font-bold hover:bg-gray-200 cursor-pointer"
+              onClick={handleTitleClick}
+            >
+              {title}
+            </h2>
+          )}
           <div className="badge badge-secondary badge-outline">
             {issue.status}
           </div>

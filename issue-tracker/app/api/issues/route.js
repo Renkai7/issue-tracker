@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import Issue from "@/models/Issue.Model";
+import Issue from "models/Issue.Model";
 
 // Get ALL issues
 export async function GET() {

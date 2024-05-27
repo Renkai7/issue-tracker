@@ -35,19 +35,23 @@ export const IssueProvider = ({ children }) => {
     }
   };
 
-  const updateIssueById = async (id, formData) => {
-    const res = await updateIssue(id, formData);
-    if (res.ok) {
-      const updatedIssue = await res.json();
-      setIssues((prevIssues) => [...prevIssues, updatedIssue]);
-      return updatedIssue;
+  const updateExistingIssue = async (id, updatedData) => {
+    const res = await updateIssue(id, updatedData);
+    if (res) {
+      setIssues((prevIssues) =>
+        prevIssues.map((issue) =>
+          issue._id === id ? { ...issue, ...updatedData } : issue
+        )
+      );
+      return res;
     } else {
       console.error("Failed to update issue");
+      throw new Error("Failed to update issue");
     }
   };
 
   const contextValue = useMemo(
-    () => ({ issues, deleteIssueById, addNewIssue, updateIssueById }),
+    () => ({ issues, deleteIssueById, addNewIssue, updateExistingIssue }),
     [issues]
   );
 

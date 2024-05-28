@@ -2,7 +2,7 @@ import { Schema } from "mongoose";
 
 const Status = Object.freeze({
   OPEN: "OPEN",
-  IN_PROGRESS: "IN_PROGRESS",
+  IN_PROGRESS: "IN PROGRESS",
   CLOSED: "CLOSED",
 });
 

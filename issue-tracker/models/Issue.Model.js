@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { issueSchema } from "@/schemas/IssueSchema";
+import { issueSchema } from "schemas/IssueSchema";
 
 mongoose.connect(process.env.MONGODB_URI);
 mongoose.Promise = global.Promise;

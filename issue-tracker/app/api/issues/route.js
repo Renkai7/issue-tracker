@@ -1,7 +1,8 @@
+import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
-import Issue from "models/Issue.Model";
 import { getDemoIssues, addDemoIssue } from "@/lib/demoStorage";
 
+const prisma = new PrismaClient();
 const isDemoMode = process.env.NEXT_PUBLIC_IS_DEMO === "true";
 
 // Get ALL issues
@@ -10,7 +11,7 @@ export async function GET() {
     return NextResponse.json({ issues: getDemoIssues() }, { status: 200 });
   }
   try {
-    const issues = await Issue.find();
+    const issues = await prisma.issue.findMany();
     return NextResponse.json({ issues }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ message: "Error", error }, { status: 500 });
@@ -31,8 +32,19 @@ export async function POST(req) {
   }
   try {
     const body = await req.json();
-    const issueData = body.formData;
-    const newIssue = await Issue.create(issueData);
+
+    // Handle issueNumber increment logic
+    const lastIssue = await prisma.issue.findFirst({
+      orderBy: { issueNumber: "desc" },
+    });
+    const newIssueNumber = lastIssue ? lastIssue.issueNumber + 1 : 1;
+
+    const newIssue = await prisma.issue.create({
+      data: {
+        ...body.formData,
+        issueNumber: newIssueNumber,
+      },
+    });
 
     return NextResponse.json(newIssue, { status: 201 });
   } catch (error) {

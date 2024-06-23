@@ -18,7 +18,7 @@ export const IssueProvider = ({ children }) => {
   const deleteIssueById = async (id) => {
     const res = await deleteIssue(id);
     if (res.ok) {
-      setIssues((prevIssues) => prevIssues.filter((issue) => issue._id !== id));
+      setIssues((prevIssues) => prevIssues.filter((issue) => issue.id !== id));
     } else {
       console.error("Failed to delete issue");
     }
@@ -40,7 +40,7 @@ export const IssueProvider = ({ children }) => {
     if (res) {
       setIssues((prevIssues) =>
         prevIssues.map((issue) =>
-          issue._id === id ? { ...issue, ...updatedData } : issue
+          issue.id === id ? { ...issue, ...updatedData } : issue
         )
       );
       return res;

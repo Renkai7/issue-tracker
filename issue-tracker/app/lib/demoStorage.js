@@ -10,18 +10,15 @@ const initializeDemoIssues = () => {
 initializeDemoIssues();
 
 export const getDemoIssues = () => {
-  console.log("Log from getDemoIssues");
   return demoIssues;
 };
 
 export const getDemoIssueByNumber = (issueNumber) => {
-  console.log("Log from getDemoIssueByNumber");
   return demoIssues.find((issue) => issue.issueNumber === issueNumber);
 };
 
 export const addDemoIssue = (issue) => {
   try {
-    console.log("Log from addDemoIssue");
     const lastIssue =
       demoIssues.length > 0 ? demoIssues[demoIssues.length - 1] : null;
     const newIssueNumber = lastIssue ? lastIssue.issueNumber + 1 : 1;
@@ -42,7 +39,6 @@ export const addDemoIssue = (issue) => {
 
 export const deleteDemoIssue = (id) => {
   try {
-    console.log("Log from deleteDemoIssue");
     demoIssues = demoIssues.filter((issue) => issue.id !== id);
     return demoIssues;
   } catch (error) {
@@ -52,7 +48,6 @@ export const deleteDemoIssue = (id) => {
 
 export const updateDemoIssue = (id, updatedData) => {
   try {
-    console.log("Log from updateDemoIssue");
     demoIssues = demoIssues.map((issue) =>
       issue.id === id ? { ...issue, ...updatedData } : issue
     );

@@ -58,7 +58,7 @@ const IssueDetailCard = () => {
             onBlur={handleDescriptionBlur}
           />
           <div className="card-actions justify-end mt-6">
-            <DeleteButton issueId={issue._id} />
+            <DeleteButton issueId={issue.id} />
           </div>
         </div>
       </div>

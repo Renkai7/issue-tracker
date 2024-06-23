@@ -24,7 +24,10 @@ const NavBar = () => {
           </li>
         </ul>
       </div>
-      <div className="navbar-end">
+      <div className="navbar-end space-x-4">
+        <Link href={"/"}>
+          <button className="btn btn-primary">Sign In</button>
+        </Link>
         <Link href={"/issues/new"}>
           <button className="btn btn-secondary">Create Issue</button>
         </Link>

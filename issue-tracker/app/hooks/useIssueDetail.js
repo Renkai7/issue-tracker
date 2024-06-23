@@ -48,7 +48,7 @@ const useIssueDetail = () => {
     setIsEditingTitle(false);
 
     try {
-      await updateExistingIssue(issue._id, { title });
+      await updateExistingIssue(issue.id, { title });
     } catch (error) {
       console.error("Failed to update issue", error);
     }
@@ -66,7 +66,7 @@ const useIssueDetail = () => {
   const handleDescriptionBlur = async () => {
     setIsEditingDescription(false);
     try {
-      await updateExistingIssue(issue._id, { description });
+      await updateExistingIssue(issue.id, { description });
     } catch (error) {
       console.error("Failed to update issue", error);
     }
@@ -84,7 +84,7 @@ const useIssueDetail = () => {
   const handleStatusBlur = async () => {
     setIsEditingStatus(false);
     try {
-      await updateExistingIssue(issue._id, { status });
+      await updateExistingIssue(issue.id, { status });
     } catch (error) {
       console.error("Failed to update issue", error);
     }

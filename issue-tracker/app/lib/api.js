@@ -1,7 +1,7 @@
 //* Get all issues
 export const getIssues = async () => {
   try {
-    const res = await fetch("http://localhost:3000/api/issues", {
+    const res = await fetch("/api/issues", {
       cache: "no-store",
     });
 
@@ -28,6 +28,7 @@ export const getIssue = async (issueNumber) => {
         cache: "no-store",
       }
     );
+    console.log("Found");
 
     if (!res.ok) {
       // Log the status and response body if the response is not OK
@@ -36,7 +37,6 @@ export const getIssue = async (issueNumber) => {
       throw new Error(`HTTP error! status: ${res.status}`);
     }
     const data = await res.json();
-
     return data.foundIssue;
   } catch (error) {
     console.log("failed to get issue", error);
@@ -46,7 +46,7 @@ export const getIssue = async (issueNumber) => {
 // * Add issue
 export const addIssue = async (formData) => {
   try {
-    const res = await fetch("http://localhost:3000/api/issues", {
+    const res = await fetch("/api/issues", {
       method: "post",
       body: JSON.stringify({ formData }),
       "content-type": "application/json",
@@ -67,7 +67,7 @@ export const deleteIssue = async (issueId) => {
         method: "DELETE",
       }
     );
-
+    console.log(issueId);
     return res;
   } catch (error) {
     console.log("failed to delete issue", error);
@@ -77,6 +77,7 @@ export const deleteIssue = async (issueId) => {
 // TODO: Add PUT api
 export const updateIssue = async (issueId, updatedData) => {
   try {
+    console.log("Reached");
     const res = await fetch(
       `http://localhost:3000/api/issues/by-id/${issueId}`,
       {
@@ -85,6 +86,7 @@ export const updateIssue = async (issueId, updatedData) => {
         "content-type": "application/json",
       }
     );
+
     return res;
   } catch (error) {
     console.log("failed to update issue", error);
